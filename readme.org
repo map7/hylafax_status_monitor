@@ -24,3 +24,8 @@ The contents should look like this
 Once off
 : hylafax_status_monitor
 
+** Run tests
+
+All the tests are written in rspec simply run rspec from the projects base directory
+: rspec
+
