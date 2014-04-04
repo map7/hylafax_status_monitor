@@ -1,0 +1,26 @@
+* Hylafax Status Monitor
+
+Hylafax status monitor will read the output from 'faxstat' and if there is a problem email the admin for that system.
+
+** Installation
+
+1. Install ruby on the system
+2. Configure & test your hylafax server
+3. Add this script to crontab to check every 5 minutes.
+   : */5 * * * * root /usr/local/bin/hylafax_status_monitor
+
+** Config
+
+Configuration is done in a json file
+: /etc/hylafax_status_monitor.json
+
+The contents should look like this
+: {
+:         "email":"<email to send reports to>"
+: }
+
+** Running
+
+Once off
+: hylafax_status_monitor
+
