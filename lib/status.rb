@@ -28,7 +28,7 @@ def status(text)
       store.transaction {store[:timed_status] = Time.now}
       true
 
-    elsif Time.now > timed_status
+    elsif Time.now > timed_status + 300
       # Check if this same error has been happening for more than 5 minutes.
       puts "reset timed_status"
       store.transaction {store[:timed_status] = nil}
