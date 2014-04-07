@@ -33,7 +33,7 @@ else
   puts "Fax is down still down\n"
   puts @output
 
-  if sent_status(status) == false
+  if sent_status(false) == false
     # Set up delivery defaults to use inhouse mail server
     Mail.defaults do
       delivery_method :smtp, {
