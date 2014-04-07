@@ -14,17 +14,23 @@ rescue
   exit
 end
 
-# Get the output from the Faxstat
-output = %x(faxstat)
+def get_status
+  # Get the output from the Faxstat
+  output = %x(faxstat)
+  text = get_output(output)
+  status = status(text)
+end
 
-text = get_output(output)
-status = status(text)
+if get_status == false
+  puts "Fax is down, attempting a restart"
+  %x(service hylafax restart)
+end
 
-if status
+if get_status
   puts "Fax is running successfully"
   set_status(false) # Record that we haven't sent any error messages
 else
-  puts "Fax is down\n"
+  puts "Fax is down still down\n"
   puts output
 
   if sent_status(status) == false
