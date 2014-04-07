@@ -46,5 +46,6 @@ else
     end
     
     puts "\nSending email to #{email}"
+    set_status(true) # Record that we have sent the error email
   end
 end
