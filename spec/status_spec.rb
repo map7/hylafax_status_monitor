@@ -56,9 +56,18 @@ describe "#sent_status" do
     end
  
     context "hasn't sent" do
-      it "returns false" do
-        @store.transaction {@store[:sent] = false}
-        sent_status(false).should eq(false)
+      context "store exists" do
+        it "returns false" do
+          @store.transaction {@store[:sent] = false}
+          sent_status(false).should eq(false)
+        end
+      end
+
+      context "store doesn't exist" do
+        it "returns false" do
+          @store.transaction {@store[:sent] = nil}
+          sent_status(false).should eq(false)
+        end
       end
     end 
   end

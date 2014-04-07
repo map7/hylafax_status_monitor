@@ -31,11 +31,19 @@ def sent_status(fax_status)
 
   if fax_status && sent
     # Fax is back and working so lets reset the sent flag.
-    store.transaction{store[:sent] = false}
+    set_status(false)
     true
+  elsif sent == nil
+    set_status(false)
+    false
   else
     # Return the fail sent status
     sent
   end
 end
 
+
+def set_status(value)
+  store = PStore.new(FILENAME)
+  store.transaction{store[:sent] = value}
+end
