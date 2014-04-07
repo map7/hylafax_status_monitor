@@ -22,7 +22,7 @@ The contents should look like this
 ** Running
 
 Once off
-: hylafax_status_monitor
+: ./hylafax_status_monitor.rb
 
 ** Run tests
 
