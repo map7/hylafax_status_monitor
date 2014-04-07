@@ -23,6 +23,7 @@ end
 if get_status == false
   puts "Fax is down, attempting a restart"
   %x(service hylafax restart)
+  sleep 4
 end
 
 if get_status
