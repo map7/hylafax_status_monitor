@@ -20,7 +20,12 @@ output = %x(faxstat)
 text = get_output(output)
 status = status(text)
 
-if status == false
+if status
+  puts "Fax is running successfully"
+else
+  puts "Fax is down"
+  puts output
+  
   # If we have a problem email the output to my email address
   mail = Mail.new do
     from email
