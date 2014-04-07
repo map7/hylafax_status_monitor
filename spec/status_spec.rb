@@ -41,3 +41,48 @@ describe "#status" do
     end
   end
 end
+
+describe "#sent_status" do
+  before do
+    @store = PStore.new("/tmp/hylafax_status_failed.db")
+  end
+  
+  context "fax status is bad(false)" do
+    context "have already sent" do
+      it "returns true" do
+        @store.transaction {@store[:sent] = true}
+        sent_status(false).should eq(true)
+      end
+    end
+ 
+    context "hasn't sent" do
+      it "returns false" do
+        @store.transaction {@store[:sent] = false}
+        sent_status(false).should eq(false)
+      end
+    end 
+  end
+
+  context "fax status is good(true)" do 
+    context "have already sent" do
+      it "returns true" do
+        @store.transaction {@store[:sent] = true}
+        sent_status(true).should eq(true)
+      end
+
+      it "resets the sent status" do
+        @store.transaction {@store[:sent] = true}
+        sent_status(true).should eq(true)
+        @store.transaction {@store[:sent].should eq(false)}
+      end
+    end
+
+    context "hasn't sent" do
+      it "returns false" do
+        @store.transaction {@store[:sent] = false}
+        sent_status(true).should eq(false)
+      end
+    end 
+  end
+  
+end
