@@ -15,10 +15,9 @@ rescue
 end
 
 def get_status
-  # Get the output from the Faxstat
-  output = %x(faxstat)
-  text = get_output(output)
-  status = status(text)
+  # Get output & status
+  @output = %x(faxstat)
+  status(get_output(@output))
 end
 
 if get_status == false
@@ -31,7 +30,7 @@ if get_status
   set_status(false) # Record that we haven't sent any error messages
 else
   puts "Fax is down still down\n"
-  puts output
+  puts @output
 
   if sent_status(status) == false
     # Set up delivery defaults to use inhouse mail server
@@ -44,12 +43,12 @@ else
       }
     end
     
-    # If we have a problem email the output to my email address
+    # If we have a problem email the @output to my email address
     Mail.deliver do
       from email
       to email
       subject "Fax is down"
-      body output
+      body @output
     end
     
     puts "\nSending email to #{email}"
