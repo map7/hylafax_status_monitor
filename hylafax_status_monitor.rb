@@ -22,6 +22,7 @@ status = status(text)
 
 if status
   puts "Fax is running successfully"
+  set_status(false) # Record that we haven't sent any error messages
 else
   puts "Fax is down\n"
   puts output
