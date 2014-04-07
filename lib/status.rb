@@ -19,7 +19,7 @@ end
 # Return true/false depending on if the status is good or bad.
 #
 def status(text)
-  text == "Initialize server" || text == "Running and idle" || !!(text =~ /Sending Job/)
+  text == "Initializing server" || text == "Running and idle" || !!(text =~ /Sending Job/)
 end
 
 #

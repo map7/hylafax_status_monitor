@@ -19,7 +19,7 @@ end
 describe "#status" do
   context "initialize server" do
     it "returns true" do
-      status("Initialize server").should eq(true)
+      status("Initializing server").should eq(true)
     end
   end
 
