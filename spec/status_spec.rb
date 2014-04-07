@@ -18,6 +18,11 @@ describe "#get_output" do
 end
 
 describe "#status" do
+
+  after do
+    Timecop.return
+  end
+
   context "initialize server" do
     it "returns true" do
       status("Initializing server").should eq(true)
