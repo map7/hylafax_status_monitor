@@ -1,4 +1,4 @@
-require_relative '../hylafax_status_monitor'
+require_relative '../lib/status.rb'
 
 describe "#get_output" do
   context "given a good output" do
