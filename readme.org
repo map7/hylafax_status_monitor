@@ -5,8 +5,11 @@ Hylafax status monitor will read the output from 'faxstat' and if there is a pro
 ** Installation
 
 1. Install ruby on the system
-2. Configure & test your hylafax server
-3. Add this script to crontab to check every 5 minutes.
+2. Install required gems
+   : gem install mail
+   
+3. Configure & test your hylafax server
+4. Add this script to crontab to check every 5 minutes.
    : */5 * * * * root /usr/local/bin/hylafax_status_monitor
 
 ** Config

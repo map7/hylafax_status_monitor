@@ -17,7 +17,7 @@ end
 # Get the output from the Faxstat
 output = %x(faxstat)
 
-status = get_output(output)
+text = get_output(output)
 status = status(text)
 
 if status == false
