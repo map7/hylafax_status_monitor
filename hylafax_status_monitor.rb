@@ -23,7 +23,7 @@ status = status(text)
 if status
   puts "Fax is running successfully"
 else
-  puts "Fax is down"
+  puts "Fax is down\n"
   puts output
   
   # If we have a problem email the output to my email address
@@ -35,4 +35,6 @@ else
   end
   mail.delivery_method :sendmail
   mail.deliver
+  
+  puts "\nSending email to #{email}"
 end
