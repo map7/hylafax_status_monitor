@@ -22,13 +22,18 @@ def status(text)
     store = PStore.new(FILENAME)
     timed_status = store.transaction {store[:timed_status]}
 
-    if timed_status != nil && Time.now + 300 > timed_status
+    if timed_status == nil
+      # Check if this is the first time we have seen this error
+      puts "set timed_status to #{Time.now}"
+      store.transaction {store[:timed_status] = Time.now}
+      true
+
+    elsif Time.now + 300 > timed_status
       # Check if this same error has been happening for more than 5 minutes.
+      puts "reset timed_status"
       store.transaction {store[:timed_status] = nil}
       false
     else
-      # Check if this is the first time we have seen this error
-      store.transaction {store[:timed_status] = Time.now}
       true
     end
   else
