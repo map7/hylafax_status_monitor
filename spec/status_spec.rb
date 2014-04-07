@@ -1,4 +1,5 @@
 require_relative '../lib/status.rb'
+require 'timecop'
 
 describe "#get_output" do
   context "given a good output" do
@@ -32,6 +33,18 @@ describe "#status" do
   context "Sending Job 654" do
     it "returns true" do
       status("Sending Job 654").should eq(true)
+    end
+  end
+
+  context "Waiting for modem to come ready" do
+    context ("after five minutes") do
+      it "returns false" do
+        Timecop.freeze(Time.local(2014,1,1,12,00,00))
+        status("Waiting for modem to come ready").should eq(true)
+        
+        Timecop.freeze(Time.local(2014,1,1,12,06,00))
+        status("Waiting for modem to come ready").should eq(false)
+      end
     end
   end
 

@@ -18,7 +18,23 @@ end
 # Return true/false depending on if the status is good or bad.
 #
 def status(text)
-  text == "Initializing server" || text == "Running and idle" || !!(text =~ /Sending Job/)
+  if !!(text =~ /Waiting for modem/)
+    store = PStore.new(FILENAME)
+    timed_status = store.transaction {store[:timed_status]}
+
+    if timed_status == nil
+      # Check if this is the first time we have seen this error
+      store.transaction {store[:timed_status] = Time.now}
+      true
+
+    elsif Time.now + 300 > timed_status
+      # Check if this same error has been happening for more than 5 minutes.
+      store.transaction {store[:timed_status] = nil}
+      false
+    end
+  else
+    text == "Initializing server" || text == "Running and idle" || !!(text =~ /Sending Job/)
+  end
 end
 
 #
