@@ -50,7 +50,7 @@ if get_status
   
   set_status(false) # Record that we haven't sent any error messages
 else
-  puts "Fax is down still down\n"
+  puts "Fax is down\n"
   puts @output
 
   if sent_status(false) == false
