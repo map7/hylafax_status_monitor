@@ -1,6 +1,5 @@
 #!/usr/bin/env ruby
-
-require 'pstore'
+require 'pstore'                # Built in simple store for ruby
 
 FILENAME="/tmp/hylafax_status_failed.db"
 
@@ -42,7 +41,9 @@ def sent_status(fax_status)
   end
 end
 
-
+#
+# Set the sent status
+#
 def set_status(value)
   store = PStore.new(FILENAME)
   store.transaction{store[:sent] = value}
