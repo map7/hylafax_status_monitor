@@ -16,10 +16,28 @@ describe "#get_output" do
   end
 end
 
-# describe "#status" do
-#   context "initialize server" do
-#     it "returns good" do
-#       status()
-#     end
-#   end
-# end
+describe "#status" do
+  context "initialize server" do
+    it "returns true" do
+      status("Initialize server").should eq(true)
+    end
+  end
+
+  context "Running and idle" do
+    it "returns true" do
+      status("Running and idle").should eq(true)
+    end
+  end
+
+  context "Sending Job 654" do
+    it "returns true" do
+      status("Sending Job 654").should eq(true)
+    end
+  end
+
+  context "Listening to rings from modem" do
+    it "returns false" do
+      status("Listening to rings from modem").should eq(false)
+    end
+  end
+end
